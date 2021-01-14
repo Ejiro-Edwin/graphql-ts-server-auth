@@ -1,11 +1,19 @@
-import {IResolvers} from "graphql-yoga/dist/src/types"
-export const resolvers: IResolvers = {
+import * as bcrypt from "bcryptjs";
+import { User } from "./entity/User";
+import { ResolverMap } from "./types/graphql-utils";
+
+export const resolvers: ResolverMap = {
     Query: {
-      hello: (_: any, { name }: GQL.IHelloOnQueryArguments) => `Hello ${name || 'World'}`,
+      hello: (_, { name }: GQL.IHelloOnQueryArguments) => `Hello ${name || 'World'}`,
     },
     Mutation:{
-        reqister(_,{}: GQL.IHelloOnQueryArguments) => {
-
+        register: async(_, { email, password }: GQL.IRegisterOnMutationArguments) => {
+            const hashedPassword = await bcrypt.hash(password,10)
+            await User.create({
+              email,
+              password: hashedPassword,
+            })
+            return true;
         }
     }
   }

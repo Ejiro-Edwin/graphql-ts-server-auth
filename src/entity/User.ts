@@ -1,6 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column, PrimaryColumn, BeforeInsert, BaseEntity} from "typeorm";
-import uuidv4 from "uuid4"
-@Entity()
+import {Entity, Column, PrimaryColumn, BeforeInsert, BaseEntity} from "typeorm";
+const { v4: uuidV4 } = require('uuid');
+@Entity("users")
 export class User extends BaseEntity{
 
     @PrimaryColumn("uuid")
@@ -15,7 +15,7 @@ export class User extends BaseEntity{
 
     @BeforeInsert()
     addId(){
-        this.id = uuid4()
+        this.id = uuidV4()
     }
 
 }

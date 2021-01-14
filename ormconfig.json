@@ -6,7 +6,7 @@
    "password": "password",
    "database": "graphql-ts-server-auths",
    "synchronize": true,
-   "logging": false,
+   "logging": true,
    "entities": [
       "src/entity/**/*.ts"
    ],
