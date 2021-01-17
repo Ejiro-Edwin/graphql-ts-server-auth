@@ -1,10 +1,14 @@
-import {Entity, Column, PrimaryColumn, BeforeInsert, BaseEntity} from "typeorm";
-const { v4: uuidV4 } = require('uuid');
+import * as bcrypt from "bcryptjs";
+import {
+  Entity,
+  Column,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  BeforeInsert
+} from "typeorm";
 @Entity("users")
 export class User extends BaseEntity{
-
-    @PrimaryColumn("uuid")
-    id: string;
+    @PrimaryGeneratedColumn("uuid") id: string;
 
     @Column("varchar", {length:255})
     email: string;
@@ -13,9 +17,15 @@ export class User extends BaseEntity{
     password: string;
 
 
+    @Column("boolean", { default: false })
+    confirmed: boolean;
+
+    @Column("boolean", { default: false })
+    forgotPasswordLocked: boolean;
+
     @BeforeInsert()
-    addId(){
-        this.id = uuidV4()
+    async hashPasswordBeforeInsert() {
+      this.password = await bcrypt.hash(this.password, 10);
     }
 
 }
