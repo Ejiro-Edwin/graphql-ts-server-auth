@@ -17,23 +17,28 @@
    "dependencies": {
       "@types/jest": "^26.0.20",
       "bcryptjs": "^2.4.3",
+      "connect-redis": "^5.0.0",
+      "dotenv": "^8.2.0",
+      "express": "^4.17.1",
+      "express-rate-limit": "^5.2.3",
       "graphql-import": "^1.0.2",
       "graphql-request": "^3.4.0",
+      "graphql-tools": "^7.0.2",
       "graphql-yoga": "^1.18.3",
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.10",
       "ts-jest": "^26.4.4",
       "typeorm": "0.2.29",
       "uuid": "^8.3.2",
-      "uuid4": "^2.0.2"
+      "uuid4": "^2.0.2",
+      "yup": "^0.32.8"
    },
    "scripts": {
-      "start": "nodemon --exec ts-node src/index.ts",
-      "test": "jest",
+      "start": "NODE_ENV=development nodemon --exec ts-node src/index.ts",
+      "test": "NODE_ENV=test jest --watch",
       "gen-schema-types": "gql2ts src/schema.graphql -o src/types/schema.d.ts"
    },
    "jest": {
-      "globalSetup": "./src/testUtils/callSetup.js",
       "transform": {
          "^.+\\.tsx?$": "ts-jest"
       },

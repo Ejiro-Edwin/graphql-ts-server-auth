@@ -32,9 +32,10 @@
    "port": 5432,
    "username": "dimeji",
    "password": "password",
-   "database": "graphql-ts-server-auths",
+   "database": "test",
    "synchronize": true,
-   "logging": true,
+   "logging": false,
+   "dropSchema":true,
    "entities": [
       "src/entity/**/*.ts"
    ],
